@@ -1,2 +1,5 @@
 /.settings
 /.buildpath
+/cache/*
+/logs/*
+/lib/vendor/*
