@@ -24,6 +24,22 @@ test:
       delivery_strategy: none
 
 dev:
+  logger:
+    class: sfAggregateLogger
+    param:
+      level: debug
+      loggers:
+        sf_fire_php:
+          class: sfFirePHPLogger
+          param:
+            level: debug
+            processor: http://<?php echo $_SERVER['SERVER_NAME']; ?>/js/RequestProcessor.js #make sure this is absolute
+            fire_php_options:
+              maxObjectDepth: 10
+              maxArrayDepth: 20
+              useNativeJsonEncode: true
+              includeLineNumbers: true
+            renderer:
   mailer:
     param:
       delivery_strategy: none
