@@ -115,11 +115,13 @@ class sfFirePHPLogger extends sfVarLogger
     $event = $this->dispatcher->filter(new sfEvent($this, 'debug.fire_php.filter_logs'), $this->logs);
     $logs = $event->getReturnValue();
 
+    $firephp = sfFirePHP::getInstance(true);
+    $firephp->log(__METHOD__);
 
     $this->sfFire->group('Logs '.count($logs), array('Collapsed' => true));
     foreach($logs as $log)
     {
-      if(!count($log['debug_stack']))
+      if(!array_key_exists('debug_stack', $log) || !count($log['debug_stack']))
       {
          $this->fireLog($log['type'], $log['message'], $log['priority']);
       }
