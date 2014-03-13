@@ -51,7 +51,10 @@ job_delete:
 job_show:
   url:     /job/:company_slug/:location_slug/:id/:position_slug/show.:sf_format
   class:   sfDoctrineRoute
-  options: { model: JobeetJob, type: object }
+  options:
+    model: JobeetJob
+    type: object
+    method_for_query: retrieveActiveJob
   param:   { module: job, action: show, sf_format: html }
   requirements: { sf_method: get }
 

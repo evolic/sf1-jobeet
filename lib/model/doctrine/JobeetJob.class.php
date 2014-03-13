@@ -12,10 +12,18 @@
  */
 class JobeetJob extends BaseJobeetJob
 {
-    public function __toString()
+    public function save(Doctrine_Connection $conn = null)
     {
-        return sprintf('%s at %s (%s)', $this->getPosition(), $this->getCompany(), $this->getLocation());
+        if ($this->isNew() && !$this->getExpiresAt())
+        {
+            $now  = $this->getCreatedAt() ? $this->getDateTimeObject('created_at')->format('U') : time();
+            $date = date('Y-m-d H:i:s', $now + 86400 * sfConfig::get('app_active_days'));
+            $this->setExpiresAt($date);
+        }
+
+        return parent::save($conn);
     }
+
 
     public function getCompanySlug()
     {
@@ -30,5 +38,11 @@ class JobeetJob extends BaseJobeetJob
     public function getLocationSlug()
     {
         return Jobeet::slugify($this->getLocation());
+    }
+
+
+    public function __toString()
+    {
+        return sprintf('%s at %s (%s)', $this->getPosition(), $this->getCompany(), $this->getLocation());
     }
 }
