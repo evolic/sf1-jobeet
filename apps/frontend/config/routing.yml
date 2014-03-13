@@ -4,13 +4,63 @@
 # default rules
 homepage:
   url:   /
-  param: { module: default, action: index }
+  param: { module: job, action: index }
+
+job:
+  url:     /job.:sf_format
+  class:   sfDoctrineRoute
+  options: { model: JobeetJob, type: list }
+  param:   { module: job, action: index, sf_format: html }
+  requirements: { sf_method: get }
+
+job_new:
+  url:     /job/new.:sf_format
+  class:   sfDoctrineRoute
+  options: { model: JobeetJob, type: object }
+  param:   { module: job, action: new, sf_format: html }
+  requirements: { sf_method: get }
+
+job_create:
+  url:     /job.:sf_format
+  class:   sfDoctrineRoute
+  options: { model: JobeetJob, type: object }
+  param:   { module: job, action: create, sf_format: html }
+  requirements: { sf_method: post }
+
+job_edit:
+  url:     /job/:id/edit.:sf_format
+  class:   sfDoctrineRoute
+  options: { model: JobeetJob, type: object }
+  param:   { module: job, action: edit, sf_format: html }
+  requirements: { sf_method: get }
+
+job_update:
+  url:     /job/:id.:sf_format
+  class:   sfDoctrineRoute
+  options: { model: JobeetJob, type: object }
+  param:   { module: job, action: update, sf_format: html }
+  requirements: { sf_method: put }
+
+job_delete:
+  url:     /job/:id.:sf_format
+  class:   sfDoctrineRoute
+  options: { model: JobeetJob, type: object }
+  param:   { module: job, action: delete, sf_format: html }
+  requirements: { sf_method: delete }
+
+job_show:
+  url:     /job/:company_slug/:location_slug/:id/:position_slug/show.:sf_format
+  class:   sfDoctrineRoute
+  options: { model: JobeetJob, type: object }
+  param:   { module: job, action: show, sf_format: html }
+  requirements: { sf_method: get }
+
 
 # generic rules
 # please, remove them by adding more specific rules
-default_index:
-  url:   /:module
-  param: { action: index }
+#default_index:
+#  url:   /:module
+#  param: { action: index }
 
-default:
-  url:   /:module/:action/*
+#default:
+#  url:   /:module/:action/*

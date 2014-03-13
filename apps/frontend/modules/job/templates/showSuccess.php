@@ -34,7 +34,7 @@
   </div>
 
   <div style="padding: 20px 0">
-    <a href="<?php echo url_for('job/edit?id='.$job->getId()) ?>">
+    <a href="<?php echo url_for('job_edit', $job); ?>">
       Edit
     </a>
   </div>
