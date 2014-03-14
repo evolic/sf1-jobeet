@@ -58,7 +58,12 @@ JobeetJob:
     email:        job@example.com
     expires_at:   '2014-04-10'
 
-<?php for ($i = 100; $i <= 130; $i++): ?>
+<?php
+$time = time();
+for ($i = 100; $i <= 130; $i++):
+  $time++;
+  $date = date('Y-m-d H:i:s', $time);
+?>
   job_<?php echo $i ?>:
     JobeetCategory: programming
     company:      Company <?php echo $i."\n" ?>
@@ -71,5 +76,7 @@ JobeetJob:
     is_activated: true
     token:        job_<?php echo $i."\n" ?>
     email:        job@example.com
+    created_at:   '<?php echo $date ?>'
+    updated_at:   '<?php echo $date ?>'
  
 <?php endfor ?>

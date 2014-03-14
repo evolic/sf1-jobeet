@@ -1,0 +1,3 @@
+# apps/frontend/modules/category/config/view.yml
+showSuccess:
+  stylesheets: [jobs.css]

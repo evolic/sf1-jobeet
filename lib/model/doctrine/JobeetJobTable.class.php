@@ -17,25 +17,35 @@ class JobeetJobTable extends Doctrine_Table
         return Doctrine_Core::getTable('JobeetJob');
     }
 
+    public function retrieveActiveJob(Doctrine_Query $query)
+    {
+        return $this->addActiveJobsQuery($query)->fetchOne();
+    }
+
     public function getActiveJobs(Doctrine_Query $query = null)
     {
-        if (!isset($query)) {
+        return $this->addActiveJobsQuery($query)->execute();
+    }
+
+    public function countActiveJobs(Doctrine_Query $query = null)
+    {
+        return $this->addActiveJobsQuery($query)->count();
+    }
+
+    public function addActiveJobsQuery(Doctrine_Query $query = null)
+    {
+        if (is_null($query))
+        {
             $query = Doctrine_Query::create()
                 ->from('JobeetJob j');
         }
 
-        $date  = date('Y-m-d H:i:s');
-        $query->andWhere('j.expires_at > ?', $date)
-            ->addOrderBy('j.expires_at DESC');
+        $alias = $query->getRootAlias();
 
-        return $query->execute();
-    }
+        $date = date('Y-m-d H:i:s', time());
+        $query->andWhere($alias . '.expires_at > ?', $date)
+            ->addOrderBy($alias . '.created_at DESC');
 
-    public function retrieveActiveJob(Doctrine_Query $query)
-    {
-        $date  = date('Y-m-d H:i:s');
-        $query->andWhere('a.expires_at > ?', $date);
-
-        return $query->fetchOne();
+        return $query;
     }
 }
