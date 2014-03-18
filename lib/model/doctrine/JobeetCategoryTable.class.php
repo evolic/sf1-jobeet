@@ -23,6 +23,7 @@ class JobeetCategoryTable extends Doctrine_Table
         $query = $this->createQuery('c')
             ->leftJoin('c.JobeetJobs j')
             ->where('j.expires_at > ?', $date)
+            ->andWhere('j.is_activated = ?', 1)
             ->limit($max);
 
         return $query->execute();

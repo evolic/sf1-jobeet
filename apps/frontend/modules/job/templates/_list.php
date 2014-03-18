@@ -5,7 +5,7 @@
         <?php echo $job->getLocation() ?>
       </td>
       <td class="position">
-        <?php echo link_to($job->getPosition(), 'job_show', $job) ?>
+        <?php echo link_to($job->getPosition(), 'job_show_user', $job) ?>
       </td>
       <td class="company">
         <?php echo $job->getCompany() ?>

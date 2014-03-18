@@ -7,48 +7,15 @@ homepage:
   param: { module: job, action: index }
 
 job:
-  url:     /job.:sf_format
-  class:   sfDoctrineRoute
-  options: { model: JobeetJob, type: list }
-  param:   { module: job, action: index, sf_format: html }
-  requirements: { sf_method: get }
+  class:   sfDoctrineRouteCollection
+  options:
+    model:          JobeetJob
+    column:         token
+    object_actions: { publish: put }
+  requirements:
+    token: \w+
 
-job_new:
-  url:     /job/new.:sf_format
-  class:   sfDoctrineRoute
-  options: { model: JobeetJob, type: object }
-  param:   { module: job, action: new, sf_format: html }
-  requirements: { sf_method: get }
-
-job_create:
-  url:     /job.:sf_format
-  class:   sfDoctrineRoute
-  options: { model: JobeetJob, type: object }
-  param:   { module: job, action: create, sf_format: html }
-  requirements: { sf_method: post }
-
-job_edit:
-  url:     /job/:id/edit.:sf_format
-  class:   sfDoctrineRoute
-  options: { model: JobeetJob, type: object }
-  param:   { module: job, action: edit, sf_format: html }
-  requirements: { sf_method: get }
-
-job_update:
-  url:     /job/:id.:sf_format
-  class:   sfDoctrineRoute
-  options: { model: JobeetJob, type: object }
-  param:   { module: job, action: update, sf_format: html }
-  requirements: { sf_method: put }
-
-job_delete:
-  url:     /job/:id.:sf_format
-  class:   sfDoctrineRoute
-  options: { model: JobeetJob, type: object }
-  param:   { module: job, action: delete, sf_format: html }
-  requirements: { sf_method: delete }
-
-job_show:
+job_show_user:
   url:     /job/:company_slug/:location_slug/:id/:position_slug/show.:sf_format
   class:   sfDoctrineRoute
   options:
