@@ -51,7 +51,7 @@ class JobeetJobForm extends BaseJobeetJobForm
     $this->validatorSchema['logo'] = new sfValidatorFile(array(
       'required'   => false,
       'path'       => sfConfig::get('sf_upload_dir').'/jobs',
-      'mime_types' => 'web_images',
+      'mime_types' => sfConfig::get('app_validation_mime_images'),
     ));
 
     // configure labels
@@ -63,5 +63,8 @@ class JobeetJobForm extends BaseJobeetJobForm
 
     // help messages
     $this->widgetSchema->setHelp('is_public', 'Whether the job can also be published on affiliate websites or not.');
+
+    // change pattern for widget names
+    $this->widgetSchema->setNameFormat('job[%s]');
   }
 }

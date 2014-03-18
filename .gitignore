@@ -3,3 +3,4 @@
 /cache/*
 /logs/*
 /lib/vendor/*
+/web/uploads/jobs/*

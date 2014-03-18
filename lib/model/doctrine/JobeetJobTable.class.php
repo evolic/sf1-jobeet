@@ -62,4 +62,15 @@ class JobeetJobTable extends Doctrine_Table
 
         return $query;
     }
+
+    public function cleanup($days)
+    {
+        $date = date('Y-m-d', time() - 86400 * $days);
+        $query = $this->createQuery('a')
+            ->delete()
+            ->andWhere('a.is_activated = ?', 0)
+            ->andWhere('a.created_at < ?', $date);
+
+        return $query->execute();
+    }
 }
