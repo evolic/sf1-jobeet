@@ -30,7 +30,7 @@ JobeetJob:
     is_activated: true
     token:        job_sensio_labs
     email:        job@example.com
-    expires_at:   '2014-04-10'
+    expires_at:   '2014-03-10'
  
   job_extreme_sensio:
     JobeetCategory:  design
