@@ -34,14 +34,15 @@ class JobeetJob extends BaseJobeetJob
         $this->save();
     }
 
-    public function extend()
+    public function extend($force = false)
     {
-        if (!$this->expiresSoon()) {
+        if (!$force && !$this->expiresSoon()) {
             return false;
         }
 
-        $this->setExpiresAt(date('Y-m-d', time() + 86400 * sfConfig::get('app_active_days')));
+        $time = time() + 86400 * sfConfig::get('app_active_days');
 
+        $this->setExpiresAt(date('Y-m-d', $time));
         $this->save();
 
         return true;

@@ -63,6 +63,35 @@ class JobeetJobTable extends Doctrine_Table
         return $query;
     }
 
+    public function extendJobs(array $ids)
+    {
+        $query = Doctrine_Query::create()
+            ->from('JobeetJob j')
+            ->whereIn('j.id', $ids);
+
+        $conn = sfContext::getInstance()->getDatabaseManager()->getDatabase('doctrine')->getDoctrineConnection();
+
+        try {
+            $conn->beginTransaction();
+
+            $jobs = $query->execute();
+
+            foreach ($jobs as $job) {
+                $job->extend(true);
+            }
+
+            // Commit the transaction when done
+            $conn->commit();
+
+            return true;
+        } catch (Doctrine_Exception $e) {
+            // Rollback if transaction fail
+            $conn->rollback();
+        }
+
+        return false;
+    }
+
     public function cleanup($days)
     {
         $date = date('Y-m-d', time() - 86400 * $days);
@@ -72,5 +101,14 @@ class JobeetJobTable extends Doctrine_Table
             ->andWhere('a.created_at < ?', $date);
 
         return $query->execute();
+    }
+
+    public function retrieveBackendJobList(Doctrine_Query $query)
+    {
+        $rootAlias = $query->getRootAlias();
+
+        $query->leftJoin($rootAlias . '.JobeetCategory c');
+
+        return $query;
     }
 }
