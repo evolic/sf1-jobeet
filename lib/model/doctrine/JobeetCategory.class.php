@@ -42,4 +42,9 @@ class JobeetCategory extends BaseJobeetCategory
 
         return $table->addActiveJobsQuery($query);
     }
+
+    public function getLatestPost()
+    {
+        return $this->getActiveJobs(1)->getFirst();
+    }
 }
