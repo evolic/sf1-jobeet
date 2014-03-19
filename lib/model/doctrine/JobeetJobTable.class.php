@@ -118,4 +118,14 @@ class JobeetJobTable extends Doctrine_Table
             ->whereIn('a.id', $ids)
             ->execute();
     }
+
+    public function getLatestPost()
+    {
+        $query = Doctrine_Query::create()
+            ->from('JobeetJob j');
+
+        $this->addActiveJobsQuery($query);
+
+        return $query->fetchOne();
+    }
 }

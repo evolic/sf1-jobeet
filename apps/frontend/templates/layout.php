@@ -7,6 +7,8 @@
       <?php include_slot('title', 'Jobeet - Your best job board') ?>
     </title>
     <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="Latest Jobs"
+          href="<?php echo url_for('job', array('sf_format' => 'atom'), true) ?>" />
     <?php include_stylesheets() ?>
   </head>
   <body>
@@ -85,7 +87,9 @@
           </span>
           <ul>
             <li><a href="">About Jobeet</a></li>
-            <li class="feed"><a href="">Full feed</a></li>
+            <li class="feed">
+              <a href="<?php echo url_for('job', array('sf_format' => 'atom')) ?>">Full feed</a>
+            </li>
             <li><a href="">Jobeet API</a></li>
             <li class="last"><a href="">Affiliates</a></li>
           </ul>
