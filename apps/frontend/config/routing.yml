@@ -39,6 +39,13 @@ api_jobs:
   requirements:
     sf_format: (?:xml|json|yaml)
 
+affiliate:
+  class:   sfDoctrineRouteCollection
+  options:
+    model: JobeetAffiliate
+    actions: [new, create]
+    object_actions: { wait: get }
+
 # generic rules
 # please, remove them by adding more specific rules
 #default_index:
