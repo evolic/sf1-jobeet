@@ -4,3 +4,4 @@
 /logs/*
 /lib/vendor/*
 /web/uploads/jobs/*
+/.idea
