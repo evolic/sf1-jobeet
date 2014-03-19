@@ -42,6 +42,21 @@
         </div>
       </div>
 
+      <?php $job_history = $sf_user->getJobHistory(); ?>
+      <?php if (count($job_history)): ?>
+      <div id="job_history">
+        Recent viewed jobs:
+        <ul>
+          <?php foreach ($job_history as $job): ?>
+            <li>
+              <?php echo link_to($job->getPosition().' - '.$job->getCompany(), 'job_show_user', $job) ?>
+            </li>
+          <?php endforeach ?>
+        </ul>
+      </div>
+      <?php endif; ?>
+
+
       <div id="content">
         <?php if ($sf_user->hasFlash('notice')): ?>
           <div class="flash_notice">

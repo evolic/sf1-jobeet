@@ -111,4 +111,11 @@ class JobeetJobTable extends Doctrine_Table
 
         return $query;
     }
+
+    public function getJobsByIds(array $ids)
+    {
+        return $this->createQuery('a')
+            ->whereIn('a.id', $ids)
+            ->execute();
+    }
 }
