@@ -15,7 +15,28 @@ class affiliateActions extends autoAffiliateActions
 {
   public function executeListActivate()
   {
-    $this->getRoute()->getObject()->activate();
+    $affiliate = $this->getRoute()->getObject();
+    $affiliate->activate();
+
+    // send an email to the affiliate
+    $message = $this->getMailer()->compose(
+      array('jobeet@jobeet.com' => 'Jobeet Bot'),
+      $affiliate->getEmail(),
+      'Jobeet affiliate token',
+      <<<EOF
+Your Jobeet affiliate account has been activated.
+
+Your token is {$affiliate->getToken()}.
+
+The Jobeet Bot.
+EOF
+    );
+
+    if ($this->getMailer()->send($message)) {
+      $this->getUser()->setFlash('notice', 'The mail with activation token has been sent to the affiliate user.');
+    } else {
+      $this->getUser()->setFlash('error', 'An error has been encountered when sending e-mail to the affiliate user.');
+    }
 
     $this->redirect('jobeet_affiliate');
   }
@@ -36,7 +57,7 @@ class affiliateActions extends autoAffiliateActions
     if ($affiliatesTable->activateAffiliates($ids)) {
       $this->getUser()->setFlash('notice', 'The selected affiliates have been activated successfully.');
     } else {
-      $this->getUser()->setFlash('notice', 'An error has been encountered when activating affiliates.');
+      $this->getUser()->setFlash('error', 'An error has been encountered when activating affiliates.');
     }
 
     $this->redirect('jobeet_affiliate');

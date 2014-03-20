@@ -22,12 +22,19 @@ test:
   mailer:
     param:
       delivery_strategy: none
+      transport:
+        class:  Swift_MailTransport
 
 dev:
   mailer:
     param:
-      delivery_strategy: none
-
+      transport:
+        param:
+          host:       smtp.gmail.com
+          port:       465
+          encryption: ssl
+          username:   tkuter.integer@gmail.com
+          password:   da7aKm87NxL3vwX
 all:
   routing:
     class: sfPatternRouting
