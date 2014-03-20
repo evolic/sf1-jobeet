@@ -1,7 +1,10 @@
 /.settings
 /.buildpath
+/.idea
 /cache/*
 /logs/*
 /lib/vendor/*
 /web/uploads/jobs/*
-/.idea
+/data/job.dev.index/*
+/data/job.prod.index/*
+/data/job.test.index/*
