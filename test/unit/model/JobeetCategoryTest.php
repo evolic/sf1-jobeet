@@ -8,7 +8,7 @@ $table = Doctrine_Core::getTable('JobeetCategory');
 /* @var $table JobeetCategoryTable */
 
 $t->comment('->getSlug()');
-$category = $table->createQuery()->fetchOne();
+$category = $table->findByName('Design')->getFirst();
 $t->is(
   $category->getSlug(),
   Jobeet::slugify($category->getName()),
