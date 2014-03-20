@@ -1,0 +1,3 @@
+# apps/frontend/modules/affiliate/config/view.yml
+newSuccess:
+  stylesheets: [job.css]
