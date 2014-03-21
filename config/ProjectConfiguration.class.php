@@ -13,6 +13,7 @@ class ProjectConfiguration extends sfProjectConfiguration
 
     $this->enablePlugins('sfFirePHPPlugin');
     $this->enablePlugins('sfDoctrineGuardPlugin');
+    $this->enablePlugins('sfFormExtraPlugin');
   }
 
   static public function registerZend()
