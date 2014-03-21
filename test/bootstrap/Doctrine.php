@@ -1,4 +1,6 @@
 <?php
+ini_set('memory_limit', '256M');
+
 include(dirname(__FILE__).'/unit.php');
 
 $configuration = ProjectConfiguration::getApplicationConfiguration( 'frontend', 'test', true);
