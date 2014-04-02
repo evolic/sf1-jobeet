@@ -8,3 +8,4 @@
 /data/job.dev.index/*
 /data/job.prod.index/*
 /data/job.test.index/*
+.DS_Store
