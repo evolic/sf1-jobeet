@@ -33,7 +33,7 @@ dev:
           class: sfFirePHPLogger
           param:
             level: debug
-            processor: http://<?php echo $_SERVER['SERVER_NAME']; ?>/js/RequestProcessor.js #make sure this is absolute
+            processor: http://<?php echo array_key_exists('SERVER_NAME', $_SERVER) ? $_SERVER['SERVER_NAME'] : 'localhost'; ?>/js/RequestProcessor.js #make sure this is absolute
             fire_php_options:
               maxObjectDepth: 10
               maxArrayDepth: 20
